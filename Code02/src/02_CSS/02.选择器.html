@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <style>
+    /*id选择器，用来匹配页面中的某一个元素*/
+    #bx {color: red}
+    /*类选择器，多个不相关的元素可以通过class划分为同一类*/
+    .c1 {color: blue}
+    /*分组选择器*/
+    #bx,.c1,h3 { background-color: pink;}
+    /*属性选择器*/
+    input[type='text'] {background-color: red;}
+    input[type='password'] {background-color: green;}
+    /*任意元素选择器*/
+    * {
+      border: 1px solid red;
+    }
+  </style>
+</head>
+<body>
+
+<input type="text">
+<input type="password">
+<h3>这是个h3</h3>
+<p id="bx">冰箱</p>
+<p class="c1">洗衣机</p>
+<div>苹果</div>
+<div class="c1">香蕉</div>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <style>
+    /*元素分为3种：
+    1.块级元素，如:div,h1,p,元素独占一行，并且可以修改宽高
+    2.行内元素：如：sapn,img,a，元素共占一行，并且不可以修改宽高
+    3.行内块元素，元素共占一行，并且可以修改宽高
+    */
+    div {
+      border: 1px solid red;
+      width: 100px;
+      height: 100px;
+    }
+    span {
+      border: 1px solid blue;
+      /*行内元素不能*/
+      width: 100px;
+      height: 100px;
+      /*如果需要修改行内元素的宽高，那么必须将行内元素修改为块级元素或行内块元素*/
+      display: inline-block;
+    }
+    img {
+      /*可以将元素隐藏起来*/
+      display: none;
+    }
+
+  </style>
+</head>
+<body>
+
+<a href="">查看详情</a>
+<img src="../BBQ.png" alt="">
+<img src="../BBQ.png" alt="">
+<img src="../BBQ.png" alt="">
+<div>div1</div>
+<div>div2</div>
+<div>div3</div>
+<span>span1</span>
+<span>span2</span>
+<span>span3</span>
+
+</body>
+</html>

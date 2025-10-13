@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <style>
+    div {
+      width: 100px;
+      height: 100px;
+      border: 1px solid red;
+    }
+    #d1 {
+      /*绝对定位是脱离文档流的，后面的元素会顶上来*/
+      position: absolute;
+      right: 30px;
+      top: 20px;
+    }
+    #big {
+      width: 200px;
+      height: 200px;
+      background-color: pink;
+      margin: 100px 0 0 100px;
+    }
+    #big>div {
+      width: 100px;
+      height: 100px;
+      background-color: blue;
+      margin: 50px 0 0 50px;
+      position: relative;/*设置相对定位，做参照物*/
+    }
+    #big>div>div {
+      width: 50px;
+      height: 50px;
+      background-color: green;
+      position: absolute;
+      right:25px;
+      top: 25px;
+    }
+
+  </style>
+
+</head>
+<body>
+<div id="big">
+  <div>
+    <div></div>
+  </div>
+</div>
+
+<div id="d1">div1</div>
+<div id="d2">div2</div>
+<div id="d3">div3</div>
+</body>
+</html>

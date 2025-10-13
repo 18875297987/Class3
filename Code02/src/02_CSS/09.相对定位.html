@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <style>
+    div {
+      width: 100px;
+      height: 100px;
+      border: 1px solid red;
+    }
+    #d1 {
+      /*margin:20px 0 0 20px;*/
+      /*想要实现移动一个元素，其它元素不受影响，那么就可以使用相对定位*/
+      position: relative;
+      /*通过top/right/left/bottom让元素相对于初始位置做偏移*/
+      top: 20px;
+      left: 20px;
+      /*相对定位：元素不脱离文档流，元素依然还是会占据原来的位置，后面的元素不会顶上来*/
+    }
+
+  </style>
+</head>
+<body>
+<div id="d1">div1</div>
+<div id="d2">div2</div>
+<div id="d3">div3</div>
+</body>
+</html>

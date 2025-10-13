@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /*子孙后代选择器:通过元素和元素之间的关系匹配元素（包含后代） */
+        /*body div div p {color: red}*/
+        /*子元素选择器：通过元素和元素之间的关系匹配元素（不包含后代）*/
+        body>div>div>p {color: red}
+        /*伪类选择器*/
+        /*未访问*/
+        a:link {color: red}
+        /*访问过*/
+        a:visited {color: green}
+        /*悬停*/
+        a:hover {color: yellow}
+        /*激活(点击)*/
+        a:active {color: pink}
+    </style>
+</head>
+<body>
+<a href="https://www.baidu.com">百度</a>
+<a href="https://www.bilibili.com">哔哩哔哩</a>
+<p>p1</p>
+<div>
+    <p>p2</p>
+</div>
+
+<div>
+    <div>
+        <p>p3</p>
+    </div>
+
+    <div>
+        <p>p4</p>
+        <div>
+            <p>p5</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

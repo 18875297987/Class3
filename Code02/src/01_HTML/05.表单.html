@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="#">
+    <!--
+      name属性是所有控件必须添加的，否则不提交该参数
+      placeholder占位文本，提示文本
+      value 设置控件的默认值
+      maxlength 设置最大字符长度
+      readonly只读
+    -->
+    用户名：<input type="text" name="username" placeholder="请输入用户名"
+               value="张三" maxlength="5" readonly> <br>
+    密码：<input type="password" name="pwd" placeholder="请输入密码"> <br>
+    <!--单选框必须要设置value属性，如果不设置则提交on  checked设置默认选中-->
+    性别：<input type="radio" name="gender" value="m" id="r1">
+    <label for="r1">男</label>
+    <input type="radio" name="gender" value="w" id="r2" checked>
+    <label for="r2">女</label> <br>
+    <!--多选框和单选框属性类似-->
+    兴趣爱好：<input type="checkbox" name="hobby" value="cy">抽烟
+    <input type="checkbox" name="hobby" value="hj">喝酒
+    <input type="checkbox" name="hobby" value=tt">烫头 <br>
+    <!--日期选择器-->
+    生日：<input type="date" name="birthday"> <br>
+    <!--下拉选择器 value设置提交的值，如果不设置则不提交标签体中的内容
+    selected 设置默认选中-->
+    所在地：
+    <select name="city">
+        <option value="bj">北京</option>
+        <option value="sh">上海</option>
+        <option value="tj">天津</option>
+        <option value="cq" selected>重庆</option>
+    </select>
+    <br>
+    <!--重置按钮-->
+    <input type="reset">
+    <!--自定义按钮-->
+    <input type="button" value="按钮">
+    <hr>
+    <!--提交按钮-->
+    <button type="submit">注册</button>
+    <button type="reset">重置</button>
+    <button type="button">按钮</button>
+</form>
+
+<div>div1</div>
+<div>div2</div>
+<div>div3</div>
+<span>span1</span>
+<span>span2</span>
+<span>span3</span>
+
+</body>
+</html>

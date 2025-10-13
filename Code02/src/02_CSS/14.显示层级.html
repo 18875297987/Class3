@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <style>
+    #d1 {
+      width: 100px;
+      height: 50px;
+      background-color: red;
+      position: absolute;
+      z-index: 3;
+    }
+    #d2 {
+      width: 50px;
+      height: 100px;
+      background-color: blue;
+      position: absolute;
+      /*当元素为非static定位时，可能会出现层叠问题，就是两个元素层叠在一起
+      通过z-index的值控制显示层级，如果两个元素的值一样则后执行的会显示在前面，
+      如果值不一样，则值越大显示越靠前
+      */
+      z-index: 3;
+    }
+  </style>
+</head>
+<body>
+<div id="d1"></div>
+<div id="d2"></div>
+</body>
+</html>

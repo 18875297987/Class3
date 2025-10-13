@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <style>
+    #d1 {
+      width: 100px;
+      height: 100px;
+      border: 1px solid red;
+      /*单独给某个方向添加外边距*/
+      margin-top: 50px;
+      margin-bottom: 50px;
+      margin-left: 100px;
+      margin-right: 100px;
+      /*四个方向添加外边距*/
+      margin: 50px;
+      /*上下和左右赋值*/
+      margin: 50px 100px;
+      /*可以让元素在页面中居中显示
+      text-align:center，虽然也可以实现居中效果，但是它只对文本生效的，对元素的位置无效
+      所以想要将元素居中显示，那么就必须要使用 margin: 0 auto(自动);
+      */
+      margin: 0 auto;
+      /*上右下左 四个方向分别进行赋值*/
+      margin: 50px 100px 150px 200px;
+    }
+
+    #big {
+      width: 200px;
+      height: 200px;
+      background-color: red;
+      /*想要解决粘连问题，那么就必须要在上级元素中添加以下代码，才能解决*/
+      overflow: hidden;/*解决粘连问题*/
+    }
+    #big>div {
+      width: 50px;
+      height: 50px;
+      background-color: green;
+      /*当元素的上边缘和上级元素的上边缘重叠时，给元素添加外边距
+      会出现粘连问题，元素和上级元素之间会粘连在一起*/
+      margin-top: 100px;
+    }
+
+  </style>
+</head>
+<body>
+<div id="big">
+  <div></div>
+</div>
+
+<span id="s1">span1</span>
+<span id="s2">span2</span>
+<div id="d1">div1</div>
+<div id="d2">div2</div>
+</body>
+</html>

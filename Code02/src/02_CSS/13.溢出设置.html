@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <style>
+    div {
+      width: 200px;
+      height: 200px;
+      border: 1px solid red;
+      /*溢出设置，设置超出的部分是显示还是隐藏
+      visible:显示（默认）
+      hidden：隐藏
+      scroll:超出的部分滚动显示
+      */
+      overflow: scroll;
+    }
+    body>img {
+      width: 100px;
+      /*设置行内及行内块元素的垂直对齐方式
+      baseline基线对齐（默认）
+      bottom下对齐
+      middle中间对齐
+      top上对齐
+      */
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+<input type="text">
+<img src="../BBQ.png" alt="">
+<div>
+  <img src="../BBQ.png" alt="">
+</div>
+</body>
+</html>
