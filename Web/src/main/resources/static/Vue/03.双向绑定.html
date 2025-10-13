@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <!--v-model="变量" 让控件和变量进行双向绑定，双向绑定只能应用在控件（input）上面
+  用来获取控件的值-->
+  <input type="text" v-model="info">
+  <div>用户输入的是：{{info}}</div>
+  <hr>
+  用户名：<input type="text" placeholder="请输入用户名" v-model="username">
+  密码：<input type="text" placeholder="请输入密码" v-model="pwd">
+  <div>用户输入的用户名：{{username}}</div>
+  <div>用户输入的密码：{{pwd}}</div>
+</div>
+
+<script src="js/vue.min.js"></script>
+<script>
+    var v = new Vue({
+        el:"#app",
+        data:{
+          info:"",
+          username:"张三",
+          pwd:"123"
+        },
+        methods:{
+
+        }
+    })
+</script>
+</body>
+</html>

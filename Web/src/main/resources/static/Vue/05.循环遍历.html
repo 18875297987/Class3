@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    姓名：<input type="text" placeholder="请输入姓名" v-model="name">
+    <button @click="add()">添加</button>
+    <ul>
+        <!--v-for="遍历到的值 in 数组"，循环遍历指令，遍历数组中的每一个元素
+        并且每遍历到一个元素，那么就会生成一个元素对象li-->
+        <li v-for="(name,i) in arr">
+            {{name}} -- <input type="button" value="删除" @click="del(i)">
+        </li>
+    </ul>
+</div>
+
+<script src="js/vue.min.js"></script>
+<script>
+    var v = new Vue({
+        el: "#app",
+        data: {
+            arr: ["刘备", "关羽", "张飞"],
+            name:""
+        },
+        methods: {
+            add(){
+                /*push方法可以向数组中添加数据*/
+                v.arr.push(v.name)
+            },
+            del(i){
+                /*从数组中删除 下标i对应的数据*/
+                /*splice(删除的位置也就是下标，删除的数量)*/
+                v.arr.splice(i,1)
+            }
+        }
+    })
+</script>
+</body>
+</html>

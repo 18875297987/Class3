@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+<!--
+  Vue是目前最流行的前端框架，是基于MVVM设计模式的框架
+  Vue框架两种用法：
+  1.多页面应用：在html页面中通过引入vue.js的方式使用Vue框架
+  2.单页面应用：通过脚手架的方式使用Vue框架
+-->
+  <!--插值，让此处的显示内容和变量进行绑定，不需要标签也可以使用-->
+  {{ info }}
+  <!--v-text="变量"，让元素的文本内容和变量进行绑定，必须要在标签中才能使用-->
+  <p v-text="t"></p>
+  <h1 v-text="t"></h1>
+  <!--v-html="变量"，让元素的标签内容和变量进行绑定，必须依赖某个标签-->
+  <!--v-html和v-text的区别就是，v-html可以识别html代码-->
+  <p v-html="message"></p>
+  <p v-text="message"></p>
+</div>
+
+
+<script src="js/vue.min.js"></script>
+<script>
+    var v = new Vue({
+        el:"#app",
+        data:{
+          info:"这是插值的使用方法",
+          t:"这是v-text的使用方法",
+          message:"<b>测试v-html</b>"
+        },
+        methods:{
+
+        }
+    })
+</script>
+</body>
+</html>

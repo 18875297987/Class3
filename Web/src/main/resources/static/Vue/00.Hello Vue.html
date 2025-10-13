@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <!--{{ 变量名 }} 插值，可以获取到Vue对象中的所有的变量 -->
+    {{ message }}
+</div>
+
+{{ message }}
+
+<script src="js/vue.min.js"></script>
+<script>
+    var v = new Vue({
+        el:"#app", // 指定Vue对象生效的范围，后面的值是选择器
+        data:{ // Vue对象中用来存放变量的地方
+            message: "Hello Vue!"
+        },
+        methods:{ // 用来存放方法
+
+        }
+    })
+</script>
+
+
+
+</body>
+</html>

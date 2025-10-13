@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <!--v-bind:属性名="变量"，让xxx属性的值和变量进行绑定-->
+  <input type="text" v-bind:value="info">
+  <!--属性绑定可以简写，v-bind都可以省略掉，只需要在属性左边加上一个:即可实现属性绑定-->
+  <input type="password" :placeholder="info2">
+  <a :href="url">超链接</a>
+  <img :src="imgName">
+</div>
+
+<script src="js/vue.min.js"></script>
+<script>
+    var v = new Vue({
+        el:"#app",
+        data:{
+          info:"属性绑定测试",
+          info2:"请输入密码",
+          url:"https://www.baidu.com",
+          imgName:"https://tse2-mm.cn.bing.net/th/id/OIP-C.qzWVLxRkd2suJZYObI1RVgHaEo?w=306&h=191&c=7&r=0&o=7&cb=12&dpr=1.5&pid=1.7&rm=3"
+        },
+        methods:{
+
+        }
+    })
+</script>
+
+</body>
+</html>
