@@ -1,0 +1,13 @@
+https://cdn.staticfile.org/element-ui/2.15.9/theme-chalk/index.css
+
+使用elementUI的步骤
+1.打开浏览器，在浏览器搜索：elementUI，找到官网，在官网中点击右上角的：组件
+2.使用快捷键ctrl + F，搜索：按钮，在侧边栏中点击按钮
+3.接下来再点击基础用法下面的：显示代码，将显示出的代码全部选中并且复制
+4.回到idea，在EUI目录下创建01.按钮tml文件，生成模板代码
+5.在div中将刚才复制的代码粘贴进来
+6.将Vue目录下的js文件夹复制到EUI目录中
+7.在<script src="js/vue.min.js"></script>这行代码下添加以下代码：
+    <script src="js/index.min.js"></script>
+8.添加link标签，在link标签的href属性中奖最上面的网址粘贴进去
+
