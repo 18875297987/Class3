@@ -70,7 +70,6 @@ class music extends Thread {
     public void run() {
         try {
             // 读取音频文件，获取音频对象
-
             AdvancedPlayer adv = new AdvancedPlayer(music.class.getResourceAsStream(path));
             // 播放音乐
             adv.play();
