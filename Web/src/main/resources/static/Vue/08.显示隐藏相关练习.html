@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <h1>用户管理系统</h1>
+  <div v-if="!isLogin">
+    <input type="button" value="注册">
+    <input type="button" value="登录" @click="login()">
+  </div>
+  <div v-else>
+    <input type="text" v-model="newName">
+    <input type="button" value="添加用户"  @click="add()">
+    <input type="button" value="退出登录" @click="loginOut()">
+  </div>
+  <table border="1">
+    <caption>用户列表</caption>
+    <tr>
+      <th>编号</th>
+      <th>用户名</th>
+      <th v-if="isLogin">操作</th>
+    </tr>
+    <tr v-for="(name,index) in arr">
+      <td>{{ index + 1 }}</td>
+      <td>{{ name }}</td>
+      <td v-if="isLogin">
+        <input type="button" value="删除" @click="del(index)">
+      </td>
+    </tr>
+  </table>
+</div>
+
+<script src="js/vue.min.js"></script>
+<script>
+    var v = new Vue({
+        el:"#app",
+        data:{
+          arr:["熏悟空","居八戒","虾悟净"],
+          newName:"",
+          isLogin:false
+        },
+        methods:{
+          login(){
+            this.isLogin = true;
+          },
+          loginOut(){
+            this.isLogin = false
+          },
+          add(){
+            v.arr.push(v.newName)
+          },
+          del(index){
+            v.arr.splice(index,1)
+          }
+        }
+    })
+</script>
+</body>
+</html>

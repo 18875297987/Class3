@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <!--v-if="变量" 控制元素是否显示，变量true显示，false不显示（删除元素）-->
+    <p v-if="isVisible">刘德华</p>
+    <!--v-else 让元素的显示方式和上面的v-if取反-->
+    <p v-else>张学友</p>
+    <!--v-show="变量" 作用的v-if完全一样，区别是它是：隐藏元素-->
+    <p v-show="isVisible">渣渣辉</p>
+    <input type="button" value="反复横跳" @click="f()">
+</div>
+
+<script src="js/vue.min.js"></script>
+<script>
+    var v = new Vue({
+        el: "#app",
+        data: {
+            isVisible: false
+        },
+        methods: {
+            f() {
+                // if (this.isVisible == false) {
+                //     this.isVisible = true
+                // } else {
+                //     this.isVisible = false
+                // }
+                this.isVisible = !this.isVisible
+
+            }
+        }
+    })
+</script>
+
+</body>
+</html>
