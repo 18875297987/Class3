@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <input type="text" placeholder="请输入商品名称" v-model="product.title">
+    <input type="text" placeholder="请输入商品价格" v-model="product.price">
+    <input type="text" placeholder="请输入商品库存" v-model="product.num">
+    <input type="button" value="添加商品" @click="add()">
+    <table border="1">
+        <caption>商品列表</caption>
+        <tr>
+            <th>序号</th>
+            <th>商品名称</th>
+            <th>商品价格</th>
+            <th>商品库存</th>
+            <th>操作</th>
+        </tr>
+        <tr v-for="(p,index) in arr">
+            <td>{{ index + 1 }}</td>
+            <td>{{ p.title }}</td>
+            <td>{{ p.price }}</td>
+            <td>{{ p.num }}</td>
+            <td>
+                <input type="button" value="删除" @click="del(index)">
+            </td>
+        </tr>
+    </table>
+</div>
+
+<script src="js/vue.min.js"></script>
+<script>
+    var v = new Vue({
+        el: "#app",
+        data: {
+            arr:[
+                {title: "小米手机",price: 3000,num: 10000},
+                {title: "华为手机",price: 5000,num: 8000},
+                {title: "苹果手机",price: 8000,num: 12000}
+            ],
+            product: {
+                title:"",
+                price:"",
+                num:""
+            }
+        },
+        methods: {
+            add(){
+                /*不能直接把和页面进行双向绑定额对象添加到数组中，
+                * 因为他们两个是对象，在内存地址中引用的是同一个地址，
+                * 那么就会出现文本框里面的值改变时，表格里面的数据也会跟着改变
+                * 想要解决这个问题，那么就必须要创建一个新的对象，将数据挪到新的对象中，再添加到数组中
+                * */
+                let p = {
+                    name: this.product.title,
+                    price: this.product.price,
+                    num: this.product.num
+                }
+                /*把新对象添加到数组中，这样使用两个对象，由于他们的引用地址一致，
+                * 那么就能解决此问题
+                * */
+                this.arr.push(v.product)
+            },
+            del(index){
+                v.arr.splice(index,1)
+            }
+        }
+    })
+</script>
+</body>
+</html>
