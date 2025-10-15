@@ -1,9 +1,8 @@
 package com.wei.web.entity;
 
 public class Emp {
-    private String title;
-    private String price;
-
+    private String name;
+    private String job;
     /*在Springboot项目中用来接收客户端数据的实体类，必须要创建以下方法：
     * 1.无参构造方法
     * 2.全参构造方法
@@ -11,36 +10,29 @@ public class Emp {
     * 4.toString方法
     * 否则，会出现不能接收数据的情况
     * */
-
     public Emp() {
     }
-
-    public Emp(String title, String price) {
-        this.title = title;
-        this.price = price;
+    public Emp(String name, String job) {
+        this.name = name;
+        this.job = job;
     }
-
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
-
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
-
-    public String getPrice() {
-        return price;
+    public String getJob() {
+        return job;
     }
-
-    public void setPrice(String price) {
-        this.price = price;
+    public void setJob(String job) {
+        this.job = job;
     }
-
     @Override
     public String toString() {
         return "Emp{" +
-                "title='" + title + '\'' +
-                ", price='" + price + '\'' +
+                "name='" + name + '\'' +
+                ", job='" + job + '\'' +
                 '}';
     }
 }

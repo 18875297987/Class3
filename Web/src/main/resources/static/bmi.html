@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <h1>BMI身体测试</h1>
+  <input type="text" placeholder="请输入体重(kg)"  v-model="user.weight">
+  <br>
+  <input type="text" placeholder="请输入身高(米)" v-model="user.hight">
+  <br>
+  <input type="button" value="点击测试" @click="bmi()">
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/element-ui/2.15.9/theme-chalk/index.css">
+
+<script src="js/axios.min.js"></script>
+<script src="js/vue.min.js"></script>
+<script src="js/index.min.js"></script>
+<script>
+    var v = new Vue({
+        el:"#app",
+        data:{
+          user:{
+            weight:"",
+            hight:""
+          }
+        },
+        methods:{
+          bmi(){
+            // isNaN:判断输入的是否是一个数字，NaN：not a number的首字母缩写
+            if (isNaN(v.user.weight)|| isNaN(v.user.hight)){
+              this.$message("希望你不要不识好歹，喊你输入数字！！")
+              return
+            }
+
+            axios.post("/bmi",v.user).then(result => {
+              this.$message(result.data);
+            })
+          }
+        }
+    })
+</script>
+
+</body>
+</html>

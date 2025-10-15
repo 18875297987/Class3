@@ -45,7 +45,7 @@
             send2(){
                 /*post(请求地址，发送的对象数据)*/
                 axios.post("/test3", v.emp).then(result => {
-                    this.$message(result.data)
+                    this.$message(result.data.name + ":" + result.data.job)
                 })
             }
         }
