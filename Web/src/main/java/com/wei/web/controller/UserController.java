@@ -11,11 +11,10 @@ import java.util.ArrayList;
 @RestController
 public class UserController {
     ArrayList<RegUser> arr = new UserMapper2().getUserArr();
+    String nickname;
 
     @RequestMapping("/user/reg")
     public int reg(@RequestBody RegUser user){
-
-
         for (RegUser u : arr){
             if (u.getUsername().equals(user.getUsername())){
                 return 0;
@@ -33,14 +32,23 @@ public class UserController {
         for (RegUser u : arr){
             if (u.getUsername().equals(user.getUsername())){
                 if (u.getPassword().equals(user.getPassword())){
+                    nickname = u.getNickname();
                     return 1;
                 }
                 return 2;
             }
         }
         return 0;
-
     }
+
+    @RequestMapping("/user/geuNickname")
+    public String getNickname(){
+        return nickname;
+    }
+
+
+
+
 
 
 }

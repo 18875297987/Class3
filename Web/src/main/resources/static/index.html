@@ -5,16 +5,58 @@
     <title>Title</title>
 </head>
 <body>
-<h1>首页</h1>
-<p>
-  这我们项目的首页，在Springboot项目中的static目录下创建的index.html文件,默认是整个项目的首页
-</p>
+<div id="app">
+    <h1>
+        首页
+        <div v-if="isLogin" style="color: red;position: absolute;right: 0px;top: 20px">
+            欢迎{{ nickname }}回来
+        </div>
+    </h1>
+    <p>
+      这是我们项目的首页，在Springboot项目中的static目录下创建的index.html文件,默认是整个项目的首页
+    </p>
 
-<a href="test.html">测试页面</a>
-<br>
-<a href="bmi.html">BMI身体测试</a>
-<br>
-<a href="reg.html">注册页面</a>
+    <a href="test.html">测试页面</a>
+    <br>
+    <a href="bmi.html">BMI身体测试</a>
+    <br>
+    <a href="reg.html">注册页面</a>
+    <br>
+    <a href="login.html">登录页面</a>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/element-ui/2.15.9/theme-chalk/index.css">
+
+<script src="js/axios.min.js"></script>
+<script src="js/vue.min.js"></script>
+<script src="js/index.min.js"></script>
+<script>
+    var v = new Vue({
+        el:"#app",
+        data:{
+            isLogin:true,
+            nickname: ""
+        },
+        methods:{
+
+        },
+        // 在加载页面时，会自动调用created()方法
+        created(){
+            axios.get("/user/geuNickname").then(result => {
+                v.nickname = result.data;
+                if (v.nickname == ""){
+                    v.isLogin = false
+                }else {
+                    v.isLogin = true
+                }
+            })
+        }
+    })
+</script>
+
+
+
 
 </body>
 </html>
