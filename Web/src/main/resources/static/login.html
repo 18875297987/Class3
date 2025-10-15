@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <h1>用户登录</h1>
+    用户名：<input type="text" placeholder="请输入用户名" v-model="loginUser.username">
+    <br>
+    密码：<input type="password" placeholder="请输入密码" v-model="loginUser.password">
+    <br>
+    <input type="button" value="登录" @click="login()">
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/element-ui/2.15.9/theme-chalk/index.css">
+
+<script src="js/axios.min.js"></script>
+<script src="js/vue.min.js"></script>
+<script src="js/index.min.js"></script>
+<script>
+    var v = new Vue({
+        el: "#app",
+        data: {
+            loginUser: {
+                username: "",
+                password: "",
+            }
+        },
+        methods: {
+            login() {
+                if (this.loginUser.username == "" || this.loginUser.password == ""){
+                    this.$message("喊你不要留空文本框！");
+                    return
+                }
+                axios.post("/user/login", v.loginUser).then(result => {
+                    if (result.data == 1){
+                        alert("登录成功！");
+                        location.href = "/";
+                    }else if (result.data == 2){
+                        this.$message("密码错误！");
+                    }else {
+                        this.$message("用户名不存在！");
+                    }
+                })
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

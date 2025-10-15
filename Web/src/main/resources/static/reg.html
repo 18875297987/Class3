@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <h1>用户注册</h1>
+    用户名：<input type="text" placeholder="请输入用户名" v-model="regUser.username">
+    <br>
+    密码：<input type="password" placeholder="请输入密码" v-model="regUser.password">
+    <br>
+    昵称：<input type="text" placeholder="请输入昵称" v-model="regUser.nickname">
+    <input type="button" value="注册" @click="reg()">
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/element-ui/2.15.9/theme-chalk/index.css">
+
+<script src="js/axios.min.js"></script>
+<script src="js/vue.min.js"></script>
+<script src="js/index.min.js"></script>
+<script>
+    var v = new Vue({
+        el: "#app",
+        data: {
+            regUser:{
+                username:"",
+                password:"",
+                nickname:""
+            }
+        },
+        methods: {
+            reg(){
+                if (this.regUser.username == "" || this.regUser.password == "" || this.regUser.nickname == ""   ){
+                    this.$message("不要留有空文本框！")
+                    return
+                }
+                axios.post("/user/reg",this.regUser).then(result => {
+                    if (result.data == 1){
+                        alert("注册成功")
+                        // location.href = 跳转的地址;  作用和a标签是一样的
+                        location.href = "login.html";
+                    }else {
+                        this.$message("用户名已存在");
+                    }
+                })
+
+
+            }
+        }
+    })
+</script>
+</body>
+</html>
