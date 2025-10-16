@@ -18,8 +18,9 @@ import javax.servlet.http.HttpSession;
 * */
 
 public interface UserService {
-
     int reg(RegUser user);
     int login(RegUser user);
     String getNickname(RegUser user);
+    RegUser getUser(String username);
+    int change(RegUser user);
 }

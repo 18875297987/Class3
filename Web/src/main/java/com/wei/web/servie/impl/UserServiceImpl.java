@@ -45,4 +45,16 @@ public class UserServiceImpl implements UserService {
         RegUser dataUser = userMapper.selectByUserName(user.getUsername());
         return dataUser.getNickname();
     }
+
+    @Override
+    public RegUser getUser(String username) {
+        RegUser dataUser = userMapper.selectByUserName(username);
+        return dataUser;
+    }
+
+    @Override
+    public int change(RegUser user) {
+        int count = userMapper.change(user);
+        return count;
+    }
 }

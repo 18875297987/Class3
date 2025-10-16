@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 @RestController
+@RequestMapping("/user")
 public class UserController {
 //    ArrayList<RegUser> arr = new UserMapper2().getUserArr();
 //    String nickname;
@@ -18,7 +19,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @RequestMapping("/user/reg")
+    @RequestMapping("/reg")
     public int reg(@RequestBody RegUser user){
 //        for (RegUser u : arr){
 //            if (u.getUsername().equals(user.getUsername())){
@@ -40,8 +41,7 @@ public class UserController {
     /*
     * Session（会话）是服务器为识别并记录单个用户的访问状态而创建的“临时档案”，可以让服务器记住用户（比如是否登录、购物车内容）
     * */
-
-    @RequestMapping("/user/login")
+    @RequestMapping("/login")
     public int login(@RequestBody RegUser user , HttpSession session){
 //        for (RegUser u : arr){
 //            if (u.getUsername().equals(user.getUsername())){
@@ -62,7 +62,7 @@ public class UserController {
         return result;
     }
 
-    @RequestMapping("/user/geuNickname")
+    @RequestMapping("/geuNickname")
     public String getNickname(HttpSession session){
 //        return nickname;
         RegUser user = (RegUser)session.getAttribute("loginUser");
@@ -77,8 +77,18 @@ public class UserController {
         return nickname;
     }
 
+    @RequestMapping("/getUser")
+    public RegUser getUser(HttpSession session){
+        RegUser loginUser = (RegUser) session.getAttribute("loginUser");
+        RegUser user = userService.getUser(loginUser.getUsername());
+        return user;
+    }
 
-
+    @RequestMapping("/change")
+    public int change(@RequestBody RegUser user){
+        int result = userService.change(user);
+        return result;
+    }
 
 
 

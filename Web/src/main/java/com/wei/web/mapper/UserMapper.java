@@ -4,6 +4,7 @@ import com.wei.web.entity.RegUser;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface UserMapper {
@@ -12,4 +13,8 @@ public interface UserMapper {
 
     @Insert("insert into user_test values(#{username},#{password},#{nickname})")
     int insert(RegUser user);
+
+    @Update("update user_test set password=#{password},nickname=#{nickname}" +
+            "where username=#{username}")
+    int change(RegUser user);
 }
