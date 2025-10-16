@@ -14,7 +14,7 @@ public class TestController {
     // a标签测试
     @RequestMapping("/test")
     public String test(){
-        return "客户端使用a标签发送请求，测试成功！";
+        return "login.html";
     }
 
     @RequestMapping("/test1")
