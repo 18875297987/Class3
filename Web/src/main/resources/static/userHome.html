@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    用户名： <input type="text" v-model="user.username" readonly>
+    <br>
+    密码：<input type="text" v-model="user.password">
+    <br>
+    昵称： <input type="text" v-model="user.nickname">
+    <br>
+    <input type="button" value="修改" @click="change2()">
+    <br>
+    <a href="/">返回首页</a>
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/element-ui/2.15.9/theme-chalk/index.css">
+
+<script src="js/axios.min.js"></script>
+<script src="js/vue.min.js"></script>
+<script src="js/index.min.js"></script>
+<script>
+    var v = new Vue({
+        el: "#app",
+        data: {
+            user:{
+                username:"",
+                password:"",
+                nickname:"",
+            },
+            user2:{}
+        },
+        methods: {
+            change2(){
+                if (v.user.password == v.user2.password && v.user.nickname == v.user2.nickname){
+                    this.$message("如果不修改数据的话，请滚回首页");
+                    return;
+                }
+
+                if (v.user.password == "" || v.user.nickname == ""){
+                    this.$message("请不要留有空字符串");
+                    return;
+                }
+
+                axios.post("/user/change",v.user).then(result => {
+                    if (result.data == 1){
+                        if (confirm("修改成功，是否返回首页？")){
+                            location.href = "/";
+                        }
+                    }else {
+                        this.$message("未知错误，修改失败，请联系管理员！");
+                    }
+                })
+            }
+        },
+        created(){
+            axios.get("/user/getUser").then(result =>{
+                v.user = result.data;
+                v.user2.username = v.user.username
+                v.user2.password = v.user.password
+                v.user2.nickname = v.user.nickname
+            })
+        }
+    })
+</script>
+</body>
+</html>

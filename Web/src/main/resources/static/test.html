@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <a href="/test">超链接发送请求</a>
+    <form action="/test1">
+        <input type="text" name="a" placeholder="请输入姓名">
+        <input type="text" name="b" placeholder="请输入年龄">
+        <input type="submit" value="测试">
+    </form>
+    <input type="text" placeholder="请输入商品名称" v-model="title">
+    <input type="text" placeholder="请输入商品价格" v-model="price">
+    <input type="button" value="发送异步请求" @click="send()">
+
+    <hr>
+    <input type="text" placeholder="请输入员工姓名" v-model="emp.name">
+    <input type="text" placeholder="请输入员工工作" v-model="emp.job">
+    <input type="button" value="发送对象" @click="send2()">
+</div>
+<link rel="stylesheet" href="https://cdn.staticfile.org/element-ui/2.15.9/theme-chalk/index.css">
+<script src="js/axios.min.js"></script>
+<script src="js/vue.min.js"></script>
+<script src="js/index.min.js"></script>
+<script>
+    var v = new Vue({
+        el: "#app",
+        data: {
+            title: "",
+            price: "",
+            emp: {
+                name:"",
+                job:""
+            }
+        },
+        methods: {
+            send() {
+                axios.get("/test2?title=" + v.title + "&price=" + v.price).then(result => {
+                    this.$message(result.data)
+                })
+            },
+            send2(){
+                /*post(请求地址，发送的对象数据)*/
+                axios.post("/test3", v.emp).then(result => {
+                    this.$message(result.data.name + ":" + result.data.job)
+                })
+            }
+        }
+    })
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <h1>
+        首页
+        <div v-if="isLogin" style="color: red;position: absolute;right: 0px;top: 20px">
+            欢迎{{ nickname }}回来
+        </div>
+    </h1>
+    <p>
+        这是我们项目的首页，在Springboot项目中的static目录下创建的index.html文件,默认是整个项目的首页
+    </p>
+    <div v-if="isLogin">
+        <a href="test.html">测试页面</a>
+        <br>
+        <a href="bmi.html">BMI身体测试</a>
+        <br>
+        <a href="userHome.html">个人信息</a>
+        <br>
+        <el-button type="text" @click="logout(1)">退出登录</el-button>
+
+        <el-dialog
+                title="提示"
+                :visible.sync="dialogVisible"
+                width="30%"
+                :before-close="handleClose">
+            <span>您确定要离开了吗？</span>
+            <span slot="footer" class="dialog-footer">
+            <el-button @click="logout(2)">取 消</el-button>
+            <el-button type="primary" @click="logout(3)">确 定</el-button>
+            </span>
+        </el-dialog>
+    </div>
+
+    <div v-else>
+        <a href="reg.html">注册页面</a>
+        <br>
+        <a href="login.html">登录页面</a>
+    </div>
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/element-ui/2.15.9/theme-chalk/index.css">
+
+<script src="js/axios.min.js"></script>
+<script src="js/vue.min.js"></script>
+<script src="js/index.min.js"></script>
+<script>
+    var v = new Vue({
+        el: "#app",
+        data: {
+            isLogin: true,
+            nickname: "",
+            dialogVisible: false
+        },
+        methods: {
+            logout(num) {
+                if (num == 1){
+                    v.dialogVisible = true
+                }
+
+                if (num == 2){
+                    v.dialogVisible = false
+                }
+
+                if (num == 3){
+                    axios.get("/user/logout");
+                    // 刷新页面
+                    location.reload();
+                }
+
+            },
+            handleClose(done) {
+                this.$confirm('确认关闭？')
+                    .then(_ => {
+                        done();
+                    })
+                    .catch(_ => {
+                    });
+            }
+        },
+        // 在加载页面时，会自动调用created()方法
+        created() {
+            axios.get("/user/geuNickname").then(result => {
+                v.nickname = result.data;
+                if (v.nickname == "") {
+                    v.isLogin = false
+                } else {
+                    v.isLogin = true
+                }
+            })
+        }
+    })
+</script>
+
+
+</body>
+</html>
