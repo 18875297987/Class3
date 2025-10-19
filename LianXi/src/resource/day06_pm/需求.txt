@@ -1,0 +1,34 @@
+数据库：
+1.在Mysql中创建一个新的数据库，库名：class3_lianxi
+2.在Class_LianXi数据库下新建一张用户表:user，其中的字段有：
+	id int 主键和自增
+	username varchar(20)
+	password varchar(20)
+	nickname varchar(20)
+
+依赖和配置类：
+1.在pom.xml文件中添加Mysql、Mybatis、Lombok的依赖
+2.在application.properties文件添加连接数据库的地址、用户名、密码
+
+java代码
+1.在springlianxi包下再新建一个entity包，在entity报下创建User类，成员变量和User表字段一致
+2..新建mapper包，在mapper报下创建UserMapper，在里面实现：注册方法、根据用户名查询用户方法
+3.新建service包，在里面创建UserService接口，定义reg注册方法
+4.在service报下新建impl包，实现UserService接口，并且编写注册的业务逻辑
+5.在controller包下新建UserController，接收/user/reg地址的请求，在调用UserService处理注册请求
+
+前端代码：
+1.在index.html页面中添加一个a标签，跳转到reg.html页面
+2.在static目录下新建一个image文件夹用来存放：背景图片等其它图片资源
+3.在static目录下创建reg.html页面，在里面使用elementUI代码实现效果样式视频中的注册页面
+
+使用到的ElementUI组件
+
+1.el-input - 输入框
+
+2.el-button - 按钮
+
+3.MessageBox - 弹框
+
+4.el-form - 表单
+
