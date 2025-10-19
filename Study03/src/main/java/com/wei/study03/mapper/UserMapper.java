@@ -1,8 +1,9 @@
 package com.wei.study03.mapper;
 
-import com.wei.study03.entity.User;
+import com.wei.study03.pojo.entity.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface UserMapper {
@@ -13,4 +14,8 @@ public interface UserMapper {
             ",#{created_time},#{modified_user},#{modified_time}" +
             ")")
     int insert(User user);
+
+    @Select("select * from user where username = #{username}")
+    User selectByUsername(String username);
+
 }

@@ -1,4 +1,4 @@
-package com.wei.study03.entity;
+package com.wei.study03.pojo.entity;
 
 import lombok.Data;
 
