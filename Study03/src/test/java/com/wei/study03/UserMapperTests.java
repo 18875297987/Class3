@@ -1,6 +1,6 @@
 package com.wei.study03;
 
-import com.wei.study03.entity.User;
+import com.wei.study03.pojo.entity.User;
 import com.wei.study03.mapper.UserMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +42,12 @@ class UserMapperTests {
         user.setModified_time(date2);
         int count = userMapper.insert(user);
         System.out.println("添加成功，数量为：" + count);
+    }
 
+    @Test
+    void selectByUsername(){
+        User user = userMapper.selectByUsername("zs");
+        System.out.println(user);
     }
 
 }
