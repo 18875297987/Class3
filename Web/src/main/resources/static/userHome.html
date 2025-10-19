@@ -59,7 +59,9 @@
         created(){
             axios.get("/user/getUser").then(result =>{
                 v.user = result.data;
-                v.user2 = result.data;
+                v.user2.username = v.user.username
+                v.user2.password = v.user.password
+                v.user2.nickname = v.user.nickname
             })
         }
     })

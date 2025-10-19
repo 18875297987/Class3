@@ -90,6 +90,10 @@ public class UserController {
         return result;
     }
 
+    @RequestMapping("/logout")
+    public void logout(HttpSession session){
+        session.removeAttribute("loginUser");
+    }
 
 
 }
