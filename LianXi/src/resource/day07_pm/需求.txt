@@ -1,0 +1,11 @@
+java代码
+3.在UserService接口中，定义login登录方法
+4.在UserServiceImpl实现类中编写登录的业务逻辑
+5.在controller包下接收/user/login地址的请求，在调用UserService处理注册请求
+
+前端代码：
+1.在index.html页面中添加一个a标签，跳转到 login.html 页面
+2.将“登录页面背景图片.png“复制到image文件夹，并且设置为login.html的背景图片
+3.在static目录下创建 login.html 页面，在里面使用elementUI代码实现效果样式视频中的登录页面
+
+

@@ -4,6 +4,7 @@ import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.wei.study03.pojo.dto.UserChangeDTO;
 import com.wei.study03.pojo.dto.UserDTO;
 import com.wei.study03.pojo.entity.User;
+import com.wei.study03.pojo.vo.UserInfoVO;
 import com.wei.study03.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,8 +73,11 @@ public class UserController {
     @GetMapping("/getUserInfo")
     @ApiOperation("04.获取用户")
     @ApiOperationSupport(order = 400)
-    public User getUserInfo(String username){
-        return service.selectByUsername(username);
+    public UserInfoVO getUserInfo(@ApiIgnore HttpSession session){
+        String username = session.getAttribute("username").toString();
+
+        UserInfoVO userInfoVO = service.selectByUsername(username);
+        return userInfoVO;
     }
 
 }

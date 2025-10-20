@@ -4,6 +4,7 @@ import com.wei.study03.pojo.dto.UserChangeDTO;
 import com.wei.study03.pojo.dto.UserDTO;
 import com.wei.study03.pojo.entity.User;
 import com.wei.study03.mapper.UserMapper;
+import com.wei.study03.pojo.vo.UserInfoVO;
 import com.wei.study03.service.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,7 +118,14 @@ public class UserServiceImpl implements UserService {
 
     // 获取用户个人信息
     @Override
-    public User selectByUsername(String username) {
-        return mapper.selectByUsername(username);
+    public UserInfoVO selectByUsername(String username) {
+        User user = mapper.selectByUsername(username);
+        UserInfoVO userInfoVO = new UserInfoVO();
+        userInfoVO.setUsername(user.getUsername());
+        userInfoVO.setPhone(user.getPhone());
+        userInfoVO.setEmail(user.getEmail());
+        userInfoVO.setGender(user.getGender());
+
+        return userInfoVO;
     }
 }
