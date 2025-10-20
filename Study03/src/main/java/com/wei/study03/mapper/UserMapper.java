@@ -4,6 +4,7 @@ import com.wei.study03.pojo.entity.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface UserMapper {
@@ -17,5 +18,8 @@ public interface UserMapper {
 
     @Select("select * from user where username = #{username}")
     User selectByUsername(String username);
+
+    @Update("update user set phone=#{phone},email=#{email},gender=#{gender} where username=#{username}")
+    int updateInfoByUsername(User user);
 
 }

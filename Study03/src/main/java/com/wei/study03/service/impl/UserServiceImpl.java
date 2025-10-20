@@ -1,5 +1,6 @@
 package com.wei.study03.service.impl;
 
+import com.wei.study03.pojo.dto.UserChangeDTO;
 import com.wei.study03.pojo.dto.UserDTO;
 import com.wei.study03.pojo.entity.User;
 import com.wei.study03.mapper.UserMapper;
@@ -64,5 +65,59 @@ public class UserServiceImpl implements UserService {
         return password;
     }
 
+    // 用户登录业务
+    @Override
+    public int chackUser(UserDTO userDTO) {
+        // 用户名可能不存在
+        // 1.将用户传入的数据执行查询
+        User dataUser = mapper.selectByUsername(userDTO.getUsername());
+        // 2.如果查询到了值，表示用户存在，没查询到值为null，表示用户名不存在
+        if (dataUser == null){
+            return 601; // 表示用户名不存在
+        }
+        // 密码有可能出现错误
+        // 3.取出客户端传入的密码
+        String inputPassword = userDTO.getPassword();
+        // 4.取出数据库中的密码
+        String sqlPassword = dataUser.getPassword();
+        // 5.将用户登录时传入的密码按照原方式进行加密
+        // (1) 将salt盐值从数据库中取出
+        String salt = dataUser.getSalt();
+        // (2) 将用户输入的密码和盐值加在一起，加密密码
+        String md5Password = getMd5(salt,inputPassword);
+        // (3) 比较加密后的密码和数据库中的密码是否一致
+        if ( !md5Password.equals(sqlPassword)){
+            return 602;// 表示密码不一致
+        }
+        // 6.用户可能被封禁或是注销
+        int isDelete = dataUser.getIs_delete();
+        if (isDelete == 1){
+            return 603; // 表示用户已注销
+        }
+        if (isDelete == 2){
+            return 604; // 表示用户被封禁
+        }
 
+        return 605; // 表示登录成功
+    }
+
+    // 修改用户信息
+    @Override
+    public int changeUserInfo(UserChangeDTO userChangeDTO) {
+        User user = new User();
+        BeanUtils.copyProperties(userChangeDTO, user);
+
+        // 修改数据
+        int rows = mapper.updateInfoByUsername(user);
+        if (rows == 0){
+            return 601;// 数据库异常，修改失败
+        }
+        return 602; // 修改成功
+    }
+
+    // 获取用户个人信息
+    @Override
+    public User selectByUsername(String username) {
+        return mapper.selectByUsername(username);
+    }
 }

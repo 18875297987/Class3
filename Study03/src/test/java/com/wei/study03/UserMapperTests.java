@@ -50,4 +50,15 @@ class UserMapperTests {
         System.out.println(user);
     }
 
+    @Test
+    void updateInfoUsername(){
+        User user = new User();
+        user.setUsername("ts");
+        user.setPhone("110");
+        user.setEmail("123123@qq.com");
+        user.setGender(1);
+        int result = userMapper.updateInfoByUsername(user);
+        System.out.println("修改成功，数量：" + result);
+    }
+
 }

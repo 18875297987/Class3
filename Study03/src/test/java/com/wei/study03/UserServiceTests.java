@@ -1,5 +1,6 @@
 package com.wei.study03;
 
+import com.wei.study03.pojo.dto.UserChangeDTO;
 import com.wei.study03.pojo.dto.UserDTO;
 import com.wei.study03.pojo.entity.User;
 import com.wei.study03.service.UserService;
@@ -36,6 +37,26 @@ class UserServiceTests {
         user.setPassword("123");
         int rows = service.insertUser(user);
         System.out.println("注册成功，返回值为：" + rows);
+    }
+
+    @Test
+    void chackUser(){
+        UserDTO userDTO = new UserDTO();
+        userDTO.setUsername("ts");
+        userDTO.setPassword("123");
+        int result = service.chackUser(userDTO);
+        System.out.println("登录的结果是：" + result);
+    }
+
+    @Test
+    void changeUserInfo(){
+        UserChangeDTO userChangeDTO = new UserChangeDTO();
+        userChangeDTO.setUsername("ls2");
+        userChangeDTO.setPhone("120");
+        userChangeDTO.setEmail("12312@qq.com");
+        userChangeDTO.setGender(1);
+        int result = service.changeUserInfo(userChangeDTO);
+        System.out.println("修改完成，结果为：" + result);
     }
 
 }
