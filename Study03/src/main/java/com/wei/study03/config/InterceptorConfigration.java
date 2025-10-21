@@ -20,13 +20,11 @@ public class InterceptorConfigration  implements WebMvcConfigurer {
         list.add("/web/login.html");
         list.add("/web/register.html");
         list.add("/web/index.html");
-        list.add("/index.html");
         list.add("/web/product.html");
         list.add("/bootstrap3/**");
         list.add("/css/**");
         list.add("/images/**");
         list.add("/js/**");
-
         list.add("/web/js/**");
 
         // 将拦截器对象创建出来

@@ -154,10 +154,8 @@
     var v = new Vue({
         el: "#app",
         data: {
-            user:{
-                username:"",
-                password:""
-            },
+            user:{username:"",
+                password:""},
             rePassword:""
         },
         methods: {
@@ -172,7 +170,6 @@
                     })
                     return;
                 }
-
                 // 判断两次输入的密码是否一致
                 if (this.user.password != this.rePassword){
                     this.$message({
@@ -192,7 +189,6 @@
                             type:"error"
                         })
                     }
-
                     if (state == 603){
                         this.$message({
                             showClose:true,
@@ -219,14 +215,11 @@
                                     message: '3秒后自动跳转至登录页面'
                                 });
                             },1000)
-
                             // 设置定时器，3秒后自动跳转
                             setTimeout(() => {
                                 location.href = "login.html";
                             },9000)
                         });
-
-
                     }
 
                 })
