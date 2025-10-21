@@ -1,6 +1,7 @@
 package com.wei.study03.service.impl;
 
 import com.wei.study03.pojo.dto.UserChangeDTO;
+import com.wei.study03.pojo.dto.UserChangePwdDTO;
 import com.wei.study03.pojo.dto.UserDTO;
 import com.wei.study03.pojo.entity.User;
 import com.wei.study03.mapper.UserMapper;
@@ -127,5 +128,60 @@ public class UserServiceImpl implements UserService {
         userInfoVO.setGender(user.getGender());
 
         return userInfoVO;
+    }
+
+    //修改用户头像业务
+    @Override
+    public int changeUserAvater(String username, String avaterName) {
+        User user = mapper.selectByUsername(username);
+        user.setAvater(avaterName);
+
+        // 修改数据
+        int rows = mapper.updateAvaterByUsername(user);
+        if (rows == 0){
+            return 601; // 数据库异常
+        }
+
+        return 602; // 修改成功
+    }
+
+    // 获取用户头像地址业务
+    @Override
+    public String getAvater(String username) {
+        User user = mapper.selectByUsername(username);
+        return user.getAvater();
+    }
+
+    // 修改用户密码
+    @Override
+    public int changeUserPassword(UserChangePwdDTO pwdDTO, String username) {
+        // 将用户传入的数据执行查询，获取要修改密码的用户信息
+        User sqlUser = mapper.selectByUsername(username);
+        // 取出客户端传入的原密码
+        String inputOldPassword = pwdDTO.getOldPassword();
+        // 取出用户信息的密码
+        String sqlPassword = sqlUser.getPassword();
+        // 将原密码按照原方式进行加密
+        // 将salt从用户信息中取出
+        String salt = sqlUser.getSalt();
+        // 将原密码和盐值加在一起进行加密
+        String md5Password = getMd5(salt, inputOldPassword);
+        // 比较加密后的密码和用户信息的密码是否一致
+        if (!md5Password.equals(sqlPassword)){
+            return 601; // 密码不一致
+        }
+
+        // 如果密码相等，开始执行修改密码流程
+        // 加密新密码
+        String md5NewPassword = getMd5(salt, pwdDTO.getNewPassword());
+        // 将新加密的密码重新给用户对象进行赋值
+        sqlUser.setPassword(md5NewPassword);
+
+        // 插入到数据库中
+        int count = mapper.updatePasswordByUsername(sqlUser);
+        if (count == 0){
+            return 602; // 数据库异常
+        }
+        return 603; // 密码修改成功
     }
 }

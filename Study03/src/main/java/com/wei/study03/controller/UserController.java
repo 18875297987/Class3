@@ -2,6 +2,7 @@ package com.wei.study03.controller;
 
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.wei.study03.pojo.dto.UserChangeDTO;
+import com.wei.study03.pojo.dto.UserChangePwdDTO;
 import com.wei.study03.pojo.dto.UserDTO;
 import com.wei.study03.pojo.entity.User;
 import com.wei.study03.pojo.vo.UserInfoVO;
@@ -79,5 +80,44 @@ public class UserController {
         UserInfoVO userInfoVO = service.selectByUsername(username);
         return userInfoVO;
     }
+
+    @GetMapping("/changeUserAvater")
+    @ApiOperation("05.修改头像地址")
+    @ApiOperationSupport(order = 500)
+    public int changeUserAvater(String avaterName, @ApiIgnore HttpSession session){
+        String username = session.getAttribute("username").toString();
+
+        int result = service.changeUserAvater(username,avaterName);
+        return result;
+
+    }
+
+    @GetMapping("/getAvater")
+    @ApiOperation("06.获取头像地址")
+    @ApiOperationSupport(order = 600)
+    public String getAvater(@ApiIgnore HttpSession session){
+        String username = "";
+        try {
+           username = session.getAttribute("username").toString();
+        }catch (NullPointerException n){
+            return "";
+        }
+
+        String avater = service.getAvater(username);
+        return avater;
+    }
+
+    @PostMapping("/changePwd")
+    @ApiOperation("07.修改密码")
+    @ApiOperationSupport(order = 700)
+    public int changePwd(@RequestBody UserChangePwdDTO pwdDTO, @ApiIgnore HttpSession session){
+        String username = session.getAttribute("username").toString();
+        int result = service.changeUserPassword(pwdDTO, username);
+        if (result == 603){
+            session.removeAttribute("username");
+        }
+        return result;
+    }
+
 
 }

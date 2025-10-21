@@ -1,6 +1,7 @@
 package com.wei.study03;
 
 import com.wei.study03.pojo.dto.UserChangeDTO;
+import com.wei.study03.pojo.dto.UserChangePwdDTO;
 import com.wei.study03.pojo.dto.UserDTO;
 import com.wei.study03.pojo.entity.User;
 import com.wei.study03.service.UserService;
@@ -42,8 +43,8 @@ class UserServiceTests {
     @Test
     void chackUser(){
         UserDTO userDTO = new UserDTO();
-        userDTO.setUsername("ts");
-        userDTO.setPassword("123");
+        userDTO.setUsername("123");
+        userDTO.setPassword("qwe");
         int result = service.chackUser(userDTO);
         System.out.println("登录的结果是：" + result);
     }
@@ -58,5 +59,25 @@ class UserServiceTests {
         int result = service.changeUserInfo(userChangeDTO);
         System.out.println("修改完成，结果为：" + result);
     }
+
+    @Test
+    void changeUserAvater(){
+        String username = "123";
+        String avaterName = "weqweqwqw2131";
+        int result = service.changeUserAvater(username, avaterName);
+        System.out.println("修改完成，结果为："+ result);
+    }
+
+    @Test
+    void changeUserPassword(){
+        UserChangePwdDTO pwdDTO = new UserChangePwdDTO();
+        pwdDTO.setOldPassword("123");
+        pwdDTO.setNewPassword("qwe");
+        String username = "123";
+        int result = service.changeUserPassword(pwdDTO, username);
+        System.out.println("执行完成：结果为："+result);
+
+    }
+
 
 }

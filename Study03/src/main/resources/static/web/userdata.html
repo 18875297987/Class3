@@ -161,10 +161,10 @@
 							<label class="col-md-2 control-label">性别：</label>
 							<div class="col-md-8">
 								<label class="radio-inline">
-									<input id="gender-male" type="radio" name="gender" :value="user.gender" checked="checked">男
+									<input id="gender-male" type="radio" name="gender" value="1" v-model="user.gender" checked="checked">男
 								</label>
 								<label class="radio-inline">
-									<input id="gender-female" type="radio" name="gender" :value="user.gender" checked="checked">女
+									<input id="gender-female" type="radio" name="gender" value="0" v-model="user.gender" checked="checked">女
 								</label>
 							</div>
 						</div>

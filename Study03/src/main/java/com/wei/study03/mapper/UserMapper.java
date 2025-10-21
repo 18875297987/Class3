@@ -22,4 +22,10 @@ public interface UserMapper {
     @Update("update user set phone=#{phone},email=#{email},gender=#{gender} where username=#{username}")
     int updateInfoByUsername(User user);
 
+    @Update("update user set avater=#{avater} where username=#{username}")
+    int updateAvaterByUsername(User user);
+
+    @Update("update user set password=#{password} where username=#{username}")
+    int updatePasswordByUsername(User user);
+
 }

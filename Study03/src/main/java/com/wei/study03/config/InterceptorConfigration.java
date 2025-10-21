@@ -26,6 +26,7 @@ public class InterceptorConfigration  implements WebMvcConfigurer {
         list.add("/images/**");
         list.add("/js/**");
         list.add("/web/js/**");
+        list.add("/user/getAvater");
 
         // 将拦截器对象创建出来
         LoginInterceptor inter = new LoginInterceptor();
