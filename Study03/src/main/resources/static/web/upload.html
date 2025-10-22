@@ -21,6 +21,12 @@
 	<link rel="stylesheet" type="text/css" href="../css/footer.css" />
 </head>
 
+<style>
+	.el-upload__input {
+		display: none !important;
+	}
+</style>
+
 <body>
 <div id="app">
 	<!--头部-->
@@ -150,14 +156,16 @@
 								action="/upload/avater"
 								name="picFile"
 								limit="1"
-								list-type="picture"
+								list-type="picture-card"
 								:on-success="Success"
 								:on-preview="Preview"
 								:on-remove="Remove">
+							<i class="el-icon-plus avatar-uploader-icon"></i>
 						</el-upload>
 						<el-dialog :visible.sync="dislogVisible">
 							<img :src="dialogImageUrl" width="100%">
 						</el-dialog>
+
 					</div>
 					<div style="margin: 10px 0px 10px 30px">
 						<el-button type="success" round @click="send()">

@@ -15,6 +15,9 @@ import org.springframework.util.DigestUtils;
 import java.util.Date;
 import java.util.UUID;
 
+import static com.wei.study03.util.Md5Utils.getMd5;
+
+
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
@@ -57,14 +60,6 @@ public class UserServiceImpl implements UserService {
             return 603; // 数据库异常
         }
         return 602; // 注册成功
-    }
-
-    public String getMd5(String salt, String password){
-        for (int i = 0; i < 3; i++) {
-            // 调用md5加密算法将密码和盐值拼接在一起后进行加密
-            password = DigestUtils.md5DigestAsHex((salt + password).getBytes());
-        }
-        return password;
     }
 
     // 用户登录业务
