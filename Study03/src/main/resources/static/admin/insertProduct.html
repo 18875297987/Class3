@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .el-page-header__content {
+            color: white !important;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <el-page-header style="background-color: #0096dc;line-height: 60px;color: white"
+            @back="goback" content="添加商品页面">
+    </el-page-header>
+    <!--商品表单开始-->
+    <el-card style="width: 600px;height: 700px;margin: 0 auto">
+
+    </el-card>
+    <!--商品表单结束-->
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/element-ui/2.15.9/theme-chalk/index.css">
+
+<script src="js/axios.min.js"></script>
+<script src="js/vue.min.js"></script>
+<script src="js/index.min.js"></script>
+<script>
+    var v = new Vue({
+        el: "#app",
+        data: {},
+        methods: {}
+    })
+</script>
+
+</body>
+</html>

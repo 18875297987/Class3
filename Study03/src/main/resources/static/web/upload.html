@@ -297,7 +297,7 @@
 								// 清空文件列表，移除页面中显示的图片
 								v.fileList = [];
 								// 将原头像的路径进行拆分后获得图片名
-								let oldImageName = v.avater.split("/")[1];
+								let oldImageName = v.avater.split("/")[3];
 								// 删除请求
 								axios.get("/upload/remove?fileName=" +oldImageName)
 								// 刷新页面

@@ -129,7 +129,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public int changeUserAvater(String username, String avaterName) {
         User user = mapper.selectByUsername(username);
-        user.setAvater(avaterName);
+        user.setAvater("/avater/"+avaterName);
 
         // 修改数据
         int rows = mapper.updateAvaterByUsername(user);

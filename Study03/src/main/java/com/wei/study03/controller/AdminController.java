@@ -33,6 +33,7 @@ public class AdminController {
         int result = service.login(adminDTO);
         if (result == 603){
             session.setAttribute("username", adminDTO.getUsername());
+            session.setAttribute("admin",adminDTO.getUsername());
         }
 
         return result;

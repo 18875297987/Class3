@@ -111,7 +111,7 @@
 
                 // 准备一个对象封装分类的数据
                 let c1 = { id: c.id,name: name};
-                axios.post("/category/update",c).then(result => {
+                axios.post("/category/update",c1).then(result => {
                     // 修改页面
                     c.name = name;
                 })
