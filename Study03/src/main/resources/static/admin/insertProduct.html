@@ -16,7 +16,51 @@
     </el-page-header>
     <!--商品表单开始-->
     <el-card style="width: 600px;height: 700px;margin: 0 auto">
+        <el-form label-width="80px" :model="p"
+                :rules="formRules" ref="productForm">
+            <el-form-item label="商品标题" prop="title">
+                <el-input type="text" v-model="p.title"></el-input>
+            </el-form-item>
+            <el-form-item label="商品价格" prop="price">
+                <el-input type="text" v-model="p.price"></el-input>
+            </el-form-item>
+            <el-form-item label="商品原价" prop="old_price">
+                <el-input type="text" v-model="p.old_price"></el-input>
+            </el-form-item>
+            <el-form-item label="商品销量" prop="sale_count">
+                <el-input type="text" v-model="p.sale_count"></el-input>
+            </el-form-item>
+            <el-form-item label="商品库存" prop="num">
+                <el-input type="text" v-model="p.num"></el-input>
+            </el-form-item>
+            <el-form-item label="商品分类" prop="category_id">
+                <el-select placeholder="请选择" v-model="p. category_id">
+                    <el-option v-for="c in categoryArr" :label="c.name" :value="c.id">
+                    </el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="商品图片">
+                <!--上传组件开始-->
+                <el-upload
+                        action="/upload/product"
+                        name="picFile"
+                        limit="1"
+                        list-type="picture-card"
+                        :on-success="Success"
+                        :on-preview="Preview"
+                        :on-remove="Remove">
+                    <i class="el-icon-plus avatar-uploader-icon"></i>
+                </el-upload>
+                <el-dialog :visible.sync="dislogVisible">
+                    <img :src="dialogImageUrl" width="100%">
+                </el-dialog>
+            </el-form-item>
+            <el-form-item>
+                <el-button type="success" @click="upload()">上传商品</el-button>
+            </el-form-item>
 
+
+        </el-form>
     </el-card>
     <!--商品表单结束-->
 </div>
@@ -29,8 +73,88 @@
 <script>
     var v = new Vue({
         el: "#app",
-        data: {},
-        methods: {}
+        data: {
+            dialogImageUrl:"",
+            dialogVisible:false,
+            categoryArr:[],
+            p:{
+                title:"",
+                price:"",
+                old_price:"",
+                sale_count:"",
+                num:"",
+                category_id:"",
+                url:"",
+            },
+            formRules:{
+                title:[
+                    {required: true, message: "请输入商品标题",trigger:"blur"}
+                ],
+                price:[
+                    {required: true, message: "请输入商品价格",trigger:"blur"}
+                ],
+                old_price:[
+                    {required: true, message: "请输入商品原价",trigger:"blur"}
+                ],
+                sale_count:[
+                    {required: true, message: "请输入商品销量",trigger:"blur"}
+                ],
+                num:[
+                    {required: true, message: "请输入商品库存",trigger:"blur"}
+                ],
+                category_id: [
+                    {required: true, message: "请选择商品分类",trigger:"change"}
+                ]
+            }
+        },
+        methods: {
+            goBack(){
+                // 返回上一页面
+                history.back();
+            },
+            upload(){
+              // 触发表单验证
+              this.$refs.productForm.validate((valid) => {
+                 if (valid) {
+                     if (v.p.url == ""){
+                         v.$message.error("请选择上传的图片")
+                         return;
+                     }
+                     // 发出添加商品的请求
+                     axios.post("/product/insert",v.p).then(() => {
+                         this.$confirm("商品添加成功，是否继续添加？","提示",{
+                             confirmButtonText:"继续",
+                             cancelButtonText:"取消"
+                         }).then(() => { // 若用户点击了继续，则执行的方法
+                             location.reload();
+                         }).catch(() => { // 用户点击取消
+                             location.href = "/admin/adminIndex.html?currentIndex=2-1";
+                         })
+                     })
+                 }
+              });
+            },
+            Success(response, file ,fileList){
+                v.p.url = response;
+            },
+            Preview(file){
+                this.dialogImageUrl = file.url;
+                this.dislogVisible = true;
+            },
+            Remove(file ,fileList){
+                v.fileList = fileList;
+                // 删除图片请求
+                axios.get("/upload/removeProduct?fileName="+v.p.url).then(result => {
+                    v.p.url = "";
+                })
+            }
+        },
+        created(){
+            // 发请求获取分类的数据
+            axios.get("/category/select").then(result => {
+                v.categoryArr = result.data;
+            })
+        }
     })
 </script>
 

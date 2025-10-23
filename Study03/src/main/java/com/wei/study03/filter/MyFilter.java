@@ -11,7 +11,11 @@ import java.io.IOException;
         "/admin/adminIndex.html",
         "/category/insert",
         "/category/deleteById",
-        "/category/update"
+        "/category/update",
+
+        "/product/insert",
+        "/upload/product",
+        "/admin/insertProduct.html"
 })
 public class MyFilter implements Filter {
     // 请求到资源之前执行的方法

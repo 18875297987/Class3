@@ -28,14 +28,24 @@
                         <el-menu-item index="1-1">分类列表</el-menu-item>
                         <el-menu-item index="1-2">添加分类</el-menu-item>
                     </el-submenu>
+
+                    <el-submenu index="2">
+                        <template slot="title">
+                            <i class="el-icon-shopping-cart-1"></i>
+                            <span>商品管理</span>
+                        </template>
+                        <el-menu-item index="2-1">商品列表</el-menu-item>
+                        <el-menu-item index="2-2">添加商品</el-menu-item>
+                    </el-submenu>
+
                 </el-menu>
             </el-aside>
             <!--侧边栏结束-->
 
-            <!--主体标签结束-->
+            <!--主体标签开始-->
             <el-main>
                 <!--分类表格开始-->
-                <el-table :data="categoryArr">
+                <el-table :data="categoryArr" v-if="currentIndex=='1-1'">
                     <el-table-column type="index" label="编号" width="200"></el-table-column>
                     <el-table-column prop="name" label="分类名称" width="200"></el-table-column>
                     <el-table-column label="操作">
@@ -52,6 +62,39 @@
                     </el-table-column>
                 </el-table>
                 <!--分类表格结束-->
+
+                <!--商品表格开始-->
+                <el-table :data="productArr" v-if="currentIndex=='2-1'">
+                    <el-table-column type="index" label="编号" width="100"></el-table-column>
+                    <el-table-column prop="title" label="商品标题"></el-table-column>
+                    <el-table-column prop="price" label="商品价格"></el-table-column>
+                    <el-table-column prop="oldPrice" label="商品原价"></el-table-column>
+                    <el-table-column prop="saleCount" label="商品销量"></el-table-column>
+                    <el-table-column prop="num" label="商品库存"></el-table-column>
+                    <el-table-column prop="categoryName" label="分类名称"></el-table-column>
+                    <el-table-column label="商品图片" width="80">
+                        <!--自定义列，显示商品图片,必须要添加template-->
+                        <template slot-scope="scope">
+                            <!--scope.row代表当前当对应的数据里面的对象-->
+                            <img :src="scope.row.url" width="100%">
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="操作">
+                        <temlpate slot-scope="scope">
+                            <el-button size="mini" type="success" @click="productUpdate(scope.row)">
+                                修改
+                            </el-button>
+                            <el-popconfirm @confirm="productDelete(scope.$index,scope.row)" title="您确认删除此商品吗？">
+                                <el-button size="mini" type="danger" slot="reference">
+                                    删除
+                                </el-button>
+                            </el-popconfirm>
+                        </temlpate>
+                    </el-table-column>
+
+                </el-table>
+                <!--商品表格结束-->
+
             </el-main>
             <!--主体标签结束-->
 
@@ -70,7 +113,8 @@
         el: "#app",
         data: {
             currentIndex: "1-1",
-            categoryArr:[]
+            categoryArr:[],
+            productArr:[]
         },
         methods: {
             handleSelect(key, keyPath){
@@ -93,7 +137,11 @@
                         // 可以通过服务器想要所有分类数组的方式，解决此问题
                         v.categoryArr = result.data;
                     })
-
+                }
+                else if (key == "2-2"){
+                    location.href = "insertProduct.html";
+                }else {
+                    v.currentIndex = key;
                 }
             },
             categoryUpdate(c){
@@ -127,6 +175,11 @@
             }
         },
         created(){
+            // 获取所有商品数据
+            axios.get("/product/select").then(result => {
+                v.productArr = result.data;
+            })
+
             // 获取分类数据
             axios.get("/category/select").then(result => {
                 v.categoryArr = result.data;

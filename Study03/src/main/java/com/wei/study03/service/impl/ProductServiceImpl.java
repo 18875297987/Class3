@@ -3,18 +3,20 @@ package com.wei.study03.service.impl;
 import com.wei.study03.mapper.ProductMapper;
 import com.wei.study03.pojo.dto.ProductDTO;
 import com.wei.study03.pojo.entity.Product;
+import com.wei.study03.pojo.vo.ProductAdminVO;
 import com.wei.study03.service.ProductService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class ProductServiceImpl implements ProductService {
     @Autowired
     ProductMapper mapper;
-
+    //添加商品
     @Override
     public int insert(ProductDTO productDTO) {
         Product product = new Product();
@@ -28,5 +30,10 @@ public class ProductServiceImpl implements ProductService {
         }
 
         return 602;
+    }
+    // 查询所有有分类的商品
+    @Override
+    public List<ProductAdminVO> select() {
+        return mapper.select();
     }
 }
